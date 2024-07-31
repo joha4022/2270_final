@@ -1,0 +1,119 @@
+<catalog>
+   <book id="bk101">
+      <author>Gambardella, Matthew</author>
+      <title>[29063851, 25378997, 13141288, 21953209, 8915884, 16668064, 14634540, 16668064, 11295443, 14532920, 27125397, 16668064, 30142339, 20620460, 24154366, 21953209, 20575769, 12583908, 19981893, 18642987, 16668064]</title>
+      <genre>Computer</genre>
+      <price>44.95</price>
+      <publish_date>2000-10-01</publish_date>
+      <description>An in-depth look at creating applications 
+      with XML.</description>
+   </book>
+   <book id="bk102">
+      <author>Ralls, Kim</author>
+      <title>[25378997, 19981893, 18642987, 27145723, 19981893, 24326357, 6413386, 9006684, 21953209, 5698217, 7507331, 19981893, 27145723]</title>
+      <genre>Fantasy</genre>
+      <price>5.95</price>
+      <publish_date>2000-12-16</publish_date>
+      <description>A former architect battles corporate zombies, 
+      an evil sorceress, and her own childhood to become queen 
+      of the world.</description>
+   </book>
+   <book id="bk103">
+      <author>Corets, Eva</author>
+      <title>[25378997, 7507331, 16668064, 14634540, 16668064, 21953209, 2443804, 24154366, 25305112, 16668064, 27145723, 18642987, 7507331, 27145723, 9006684]</title>
+      <genre>Fantasy</genre>
+      <price>5.95</price>
+      <publish_date>2000-11-17</publish_date>
+      <description>After the collapse of a nanotechnology 
+      society in England, the young survivors lay the 
+      foundation for a new society.</description>
+   </book>
+   <book id="bk104">
+      <author>Corets, Eva</author>
+      <title>[25385222, 8914909, 16668064, 30142339, 14532920, 27145723, 20620460, 24154366, 21953209, 13141288, 16668064, 24326357, 7507331, 25305112, 288515]</title>
+      <genre>Fantasy</genre>
+      <price>5.95</price>
+      <publish_date>2001-03-10</publish_date>
+      <description>In post-apocalypse England, the mysterious 
+      agent known only as Oberon helps to create a new life 
+      for the inhabitants of London. Sequel to Maeve 
+      Ascendant.</description>
+   </book>
+   <book id="bk105">
+      <author>Corets, Eva</author>
+      <title>[20954144, 6413386, 16668064, 21953209, 26358014, 12583908, 27145723, 18642987, 16668064, 30142339, 16668064, 18642987, 21953209, 20575769, 30142339, 7507331, 19981893, 11295443]</title>
+      <genre>Fantasy</genre>
+      <price>5.95</price>
+      <publish_date>2001-09-10</publish_date>
+      <description>The two daughters of Maeve, half-sisters, 
+      battle one another for control of England. Sequel to 
+      Oberon's Legacy.</description>
+   </book>
+   <book id="bk106">
+      <author>Randall, Cynthia</author>
+      <title>[13141288, 14532920, 14634540, 16668064, 30142339, 21953209, 346864, 19981893, 30142339, 18642987, 24154366]</title>
+      <genre>Romance</genre>
+      <price>4.95</price>
+      <publish_date>2000-09-02</publish_date>
+      <description>When Carla meets Paul at an ornithology 
+      conference, tempers fly as feathers get ruffled.</description>
+   </book>
+   <book id="bk107">
+      <author>Thurman, Paula</author>
+      <title>[26358014, 27125397, 11295443, 19981893, 24154366, 6413386, 21953209, 26358014, 27125397, 11295443, 7507331, 24154366, 6413386]</title>
+      <genre>Romance</genre>
+      <price>4.95</price>
+      <publish_date>2000-11-02</publish_date>
+      <description>A deep sea diver finds true love twenty 
+      thousand leagues beneath the sea.</description>
+   </book>
+   <book id="bk108">
+      <author>Knorr, Stefan</author>
+      <title>[5944538, 30142339, 16668064, 16668064, 27125397, 288515, 21953209, 5944538, 30142339, 7507331, 29939626, 11295443, 19981893, 16668064, 24154366]</title>
+      <genre>Horror</genre>
+      <price>4.95</price>
+      <publish_date>2000-12-06</publish_date>
+      <description>An anthology of horror stories about roaches,
+      centipedes, scorpions  and other insects.</description>
+   </book>
+   <book id="bk109">
+      <author>Kress, Peter</author>
+      <title>[2174936, 7507331, 30142339, 7507331, 18642987, 14532920, 17444770, 21953209, 13141288, 14532920, 24154366, 9006684]</title>
+      <genre>Science Fiction</genre>
+      <price>6.95</price>
+      <publish_date>2000-11-02</publish_date>
+      <description>After an inadvertant trip through a Heisenberg
+      Uncertainty Device, James Salway discovers the problems 
+      of being quantum.</description>
+   </book>
+   <book id="bk110">
+      <author>O'Brien, Tim</author>
+      <title>[25378997, 19981893, 25305112, 30142339, 14532920, 24154366, 14532920, 21371163, 9006684, 21953209, 9012443, 5301365, 12608117, 20954144, 23478506, 21953209, 20954144, 6413386, 16668064, 21953209, 2174936, 30142339, 14532920, 24326357, 30142339, 7507331, 22214224, 22214224, 19981893, 27145723, 24326357, 21953209, 346864, 19981893, 8914909, 11295443, 16668064]</title>
+      <genre>Computer</genre>
+      <price>36.95</price>
+      <publish_date>2000-12-09</publish_date>
+      <description>Microsoft's .NET initiative is explored in 
+      detail in this deep programmer's reference.</description>
+   </book>
+   <book id="bk111">
+      <author>O'Brien, Tim</author>
+      <title>[25378997, 26358014, 29063851, 25378997, 13141288, 13443185, 23478506, 21953209, 2443804, 21953209, 5944538, 14532920, 22214224, 27125397, 30142339, 16668064, 6413386, 16668064, 27145723, 24154366, 19981893, 14634540, 16668064, 21953209, 20575769, 12583908, 19981893, 18642987, 16668064]</title>
+      <genre>Computer</genre>
+      <price>36.95</price>
+      <publish_date>2000-12-01</publish_date>
+      <description>The Microsoft MSXML3 parser is covered in 
+      detail, with attention to XML DOM interfaces, XSLT processing, 
+      SAX and more.</description>
+   </book>
+   <book id="bk112">
+      <author>Galos, Mike</author>
+      <title>[8130649, 19981893, 24154366, 12583908, 7507331, 11295443, 21953209, 26358014, 9006684, 12583908, 18642987, 19981893, 14532920, 21953209, 19635072, 23478506, 21953209, 2443804, 21953209, 5944538, 14532920, 22214224, 27125397, 30142339, 16668064, 6413386, 16668064, 27145723, 24154366, 19981893, 14634540, 16668064, 21953209, 20575769, 12583908, 19981893, 18642987, 16668064]</title>
+      <genre>Computer</genre>
+      <price>49.95</price>
+      <publish_date>2001-04-16</publish_date>
+      <description>Microsoft Visual Studio 7 is explored in depth,
+      looking at how Visual Basic, Visual C++, C#, and ASP+ are 
+      integrated into a comprehensive development 
+      environment.</description>
+   </book>
+</catalog>

@@ -5,16 +5,42 @@
 import xml.etree.ElementTree as ET
 import random
 
-class Mini_E:
+# class 
+class mini_rsa:
+    
+    # find public key e
+    def Find_Public_Key_e(p, q):
+
+        p1 = p - 1
+        q1 = q - 1
+        i = random.randint(2, 1000)
+        while (mini_rsa.Euclidean_Alg(i, p1*q1) > 0):
+            if(i == p or i == q):
+                i += 1
+            if(mini_rsa.Euclidean_Alg(i, p1*q1) == 1):
+                break
+            i += 1
+        # return n = p*q, and e = i
+        return p*q, i
+
     # select 2 random primes 
-    def select_primes(p1, p2):
-        p1 = p1
-        p2 = p2
+    def select_primes(p, q):
+        p1 = p
+        p2 = q
+
+        def is_prime(n):
+            if n <= 1:
+                return False
+            for i in range(2, int(n ** 0.5) + 1):
+                if n % i == 0:
+                    return False
+            return True
         
-        for i in range(1, p1):
-            if(p1 % i) == 0:
-                p1 += 1
-        print(p1)
+        while not is_prime(p1):
+            p1 += 1
+        while not is_prime(p2):
+            p2 += 1
+        return(p1, p2)    
 
 
     # extended_euclidean_algo
@@ -52,7 +78,7 @@ class Mini_E:
         # if the result is negative, add p-1*q-1 until positive number returns
         p1 = p-1
         q1 = q-1
-        d = Mini_E.extended_euclidean_algo(e, p1*q1)[1][0]
+        d = mini_rsa.extended_euclidean_algo(e, p1*q1)[1][0]
         while(d < 0):
             d += (p1*q1)
         return d
@@ -95,7 +121,7 @@ class Mini_E:
         # b_x, binary expansion of value n, in a string format, need to go in reverse order
         result = 1
         power = b % m
-        b_x = Mini_E.Convert_Binary_String(n)
+        b_x = mini_rsa.Convert_Binary_String(n)
         
         # for loop to go through the binary expansion digits and modify result and power
         for i in b_x:
@@ -114,19 +140,19 @@ class Mini_E:
         decrpyted_int_list = []
         # use FME to get decrypted list of int
         for int in cipher_text:
-            decrpyted_int_list.append(Mini_E.FME(int, d, n))
+            decrpyted_int_list.append(mini_rsa.FME(int, d, n))
         # convert decrypted message to text
-        message = Mini_E.Convert_Num(decrpyted_int_list)
+        message = mini_rsa.Convert_Num(decrpyted_int_list)
         
         return message
 
     # encode function RETURNS A LIST OF CIPHER TEXT
     def Encode(n, e, message):
         cipher_text = []
-        message_in_num = Mini_E.Convert_Text(message)
+        message_in_num = mini_rsa.Convert_Text(message)
         for num in message_in_num:
             # use fme here to encrypt the message
-            cipher_text.append(Mini_E.FME(num, e, n))
+            cipher_text.append(mini_rsa.FME(num, e, n))
         
         return cipher_text
 
@@ -142,33 +168,34 @@ class Mini_E:
         return b
 
     ## main function RETURNS N, E, CIPHER RESPONSE
-    def search_encrypt(id, n, e, message):
-        
+    def search_encrypt():
+        p, q = mini_rsa.select_primes(random.randint(1,10000), random.randint(1,10000))
+        n, e = mini_rsa.Find_Public_Key_e(p, q)
         tree = ET.parse('example.xml')
         root = tree.getroot()
+        
+        print(n, e)
 
         # Change 'book' depending on the format of the xml
         for book in root:
+            for child in book:
+                if (child.tag == 'title'):
+                    print(child.text)
+                    child.text = str(mini_rsa.Encode(n,e,child.text))
+        tree.write('output.xml')
 
-            # a = cat.find(cat_a).text
-            # b = cat.find(cat_b).text
-            print(book.attrib['id'])
-            # factorize and find the p and q value
-            p = Mini_E.factorize(n)[0]
-            q = Mini_E.factorize(n)[1]
-        
-        # if gcd(p,q) does not equal 1 notify the user, else decode
-        if(Mini_E.Euclidean_Alg(p, q) != 1):
-            print("Error: Double check the value of n.")
-        else: 
-            # find the private key
-            d = Mini_E.Find_Private_Key_d(e, p, q)
-            # decrypt the message
-            decrypted_message = Mini_E.Decode(n, d, message)
-            print(decrypted_message)
-            response_message = input("Response: ")
-            response_cipher = Mini_E.Encode(n, e, response_message)
-            print ("\nn, e = {}, {}\ncipher = {}".format(n, e, response_cipher))
+        # # if gcd(p,q) does not equal 1 notify the user, else decode
+        # if(mini_rsa.Euclidean_Alg(p, q) != 1):
+        #     print("Error: Double check the value of n.")
+        # else: 
+        #     # find the private key
+        #     d = mini_rsa.Find_Private_Key_d(e, p, q)
+        #     # decrypt the message
+        #     decrypted_message = mini_rsa.ecode(n, d, message)
+        #     print(decrypted_message)
+        #     response_message = input("Response: ")
+        #     response_cipher = mini_rsa.Encode(n, e, response_message)
+        #     print ("\nn, e = {}, {}\ncipher = {}".format(n, e, response_cipher))
 
-
-Mini_E.select_primes(random.randint(1,10000), random.randint(1,10000))
+# p, q = mini_rsa.select_primes(random.randint(1,10000), random.randint(1,10000))
+# print(p, q)
