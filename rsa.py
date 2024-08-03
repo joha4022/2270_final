@@ -179,10 +179,14 @@ class mini_rsa:
         # Change 'book' depending on the format of the xml
         for book in root:
             for child in book:
+                if (child.tag == 'author'):
+                    print(child.text)
+                    child.text = str(mini_rsa.Encode(n,e,child.text))
                 if (child.tag == 'title'):
                     print(child.text)
                     child.text = str(mini_rsa.Encode(n,e,child.text))
         tree.write('output.xml')
+        return n, e
 
         # # if gcd(p,q) does not equal 1 notify the user, else decode
         # if(mini_rsa.Euclidean_Alg(p, q) != 1):
