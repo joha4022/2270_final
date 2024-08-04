@@ -5,34 +5,63 @@ import rsa
 # Create the main window
 root = tk.Tk()
 root.title("Extract")
+xml_filename = ""
 
 # browse input or ouput xml
 def browseFiles():
-    filename = filedialog.askopenfilename(initialdir="/", title="Select a File", filetypes=(("Text files", "*.xml*"),("All files", "*.*")))
+    global xml_filename
+    filename = filedialog.askopenfilename(initialdir="/", title="Select a File", filetypes=((".xml files", "*.xml"),("All files", "*.*")))
     if(filename):
         label1.configure(text="File opened: " + filename)
+        xml_filename = filename.split("/")[len(filename.split("/"))-1]
 
 
 # Function to handle the encode button click
 def encode():
-    # get n and e value
-    n, e = rsa.mini_rsa.search_encrypt()
-    # create a popup window to provide n and e value
-    top = tk.Toplevel(root)
-    n_label = tk.Label(top, text="n value = {}".format(n))
-    n_label.grid(row = 0, column=0, padx=5, pady=0, sticky='w')
-    e_label = tk.Label(top, text="e value = {}".format(e))
-    e_label.grid(row = 1, column=0, padx=5, pady=0, sticky='w')
+    if(xml_filename):
+        # get n and e value
+        n, e, e_filename = rsa.search_encrypt(xml_filename)
+        # create a popup window to provide n and e value
+        top = tk.Toplevel(root)
+        n_label = tk.Label(top, text="n value: {}".format(n))
+        n_label.grid(row = 0, column=0, padx=(5,0), pady=0, sticky='w')
+        e_label = tk.Label(top, text="e value: {}".format(e))
+        e_label.grid(row = 1, column=0, padx=(5,0), pady=0, sticky='w')
+        text_label = tk.Label(top, text="output file name: {}".format(e_filename))
+        text_label.grid(row = 2, column=0, padx=(5,0), pady=0, sticky='w')
+        popup_close = tk.Button(top, text='Close', command=lambda: quit(top))
+        popup_close.grid(row = 3, column=0, padx=0, pady=(0,5))
+        
     
 
 def decode():
-    # id = entry1.get()
-    rsa.mini_rsa.search_encrypt()
+    if(xml_filename):
+        top = tk.Toplevel(root)
+
+        first_row = tk.Frame(top, width=100, height=100)
+        first_row.grid(row=0, column=0, padx=5, pady=0)
+        n_label = tk.Label(first_row, text="n value:")
+        n_label.grid(row = 0, column=0, padx=0, pady=0)
+        n_input = tk.Entry(first_row)
+        n_input.grid(row = 0, column=1, padx=0, pady=0)
+
+        e_label = tk.Label(first_row, text="e value:")
+        e_label.grid(row = 1, column=0, padx=0, pady=0)
+        e_input = tk.Entry(first_row)
+        e_input.grid(row = 1, column=1, padx=0, pady=0)
+
+        second_row = tk.Frame(top, width=100, height=100)
+        second_row.grid(row=1, column=0, padx=0, pady=5)
+        popup_decode = tk.Button(second_row, text='Decode', command=lambda: rsa.decode_and_build(xml_filename, n_input.get(), e_input.get()))
+        popup_decode.grid(row = 0, column=0, padx=0, pady=0)
+        popup_close = tk.Button(second_row, text='Close', command=lambda: quit(top))
+        popup_close.grid(row = 0, column=1, padx=0, pady=0)
+
 
 
 # Function to handle the quit button click
-def quit():
-    root.destroy()
+def quit(n):
+    n.destroy()
 
 # Create and place the labels and entry fields
 top_frame = tk.Frame(root, width = 100, height=100)
@@ -71,7 +100,7 @@ encode_button.grid(row=0, column=0, padx=5, pady=5)
 decode_button = tk.Button(bottom_frame, text="Decode", command=decode)
 decode_button.grid(row=0, column=1, padx=5, pady=5)
 
-quit_button = tk.Button(bottom_frame, text="Quit", command=quit)
+quit_button = tk.Button(bottom_frame, text="Close", command=lambda: quit(root))
 quit_button.grid(row=0, column=2, padx=5, pady=5)
 
 # Run the application
