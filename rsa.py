@@ -91,9 +91,24 @@ def factorize(n):
 
 # convert num to string function RETURNS A STRING
 def Convert_Num(_list):
+    # _string = ''
+    # for i in _list:
+    #     _string += chr(i)
+    # return _string
     _string = ''
-    for i in _list:
-        _string += chr(i)
+    i = 0
+    converted_list = []
+    while i < len(_list):
+        if(len(str(_list[i])) == 5 or len(str(_list[i])) == 2):
+            converted_list.append('0' + str(_list[i]))
+        else:
+            converted_list.append(str(_list[i]))
+        i+=1
+    i = 0
+    while i < len(converted_list):
+        _string += chr(int(converted_list[i][:3]))
+        _string += chr(int(converted_list[i][-3:]))
+        i+=1
     return _string
 
 # convert string to num function RETURNS LIST OF INT
@@ -153,12 +168,12 @@ def FME(b, n, m):
 # decode function RETURNS MESSAGE
 def Decode(n, d, cipher_text):
     message = ''
-    decrpyted_int_list = []
+    decrypted_int_list = []
     # use FME to get decrypted list of int
-    for int in cipher_text.split("'"):
-        decrpyted_int_list.append(FME(int, d, n))
+    for _int in cipher_text.split(","):
+        decrypted_int_list.append(FME(int(_int), d, n))
     # convert decrypted message to text
-    message = Convert_Num(decrpyted_int_list)
+    message = Convert_Num(decrypted_int_list)
     
     return message
 
@@ -199,7 +214,6 @@ def search_encrypt(xml_filename):
                 child.text = encoded_title
     e_filename = 'encoded_' + xml_filename
     tree.write(e_filename)
-    print(n, e)
     return n, e, e_filename
 
 def decode_and_build(xml_filename, n, e):
@@ -212,28 +226,12 @@ def decode_and_build(xml_filename, n, e):
     for book in root:
         for child in book:
             if (child.tag == 'author'):
-                print(child.text)
-                # child.text = Decode(n,d,child.text)
-            #if (child.tag == 'title'):
-                #child.text = Decode(n,d,child.text)
-    e_filename = 'decoded_' + xml_filename
+                child.text = Decode(n,d,child.text)
+            if (child.tag == 'title'):
+                child.text = Decode(n,d,child.text)
+    e_filename = 'decoded_' + xml_filename.split('encoded_')[1]
     tree.write(e_filename)
+    return e_filename
     
-
-
-
-    # # if gcd(p,q) does not equal 1 notify the user, else decode
-    # if(Euclidean_Alg(p, q) != 1):
-    #     print("Error: Double check the value of n.")
-    # else: 
-    #     # find the private key
-    #     d = Find_Private_Key_d(e, p, q)
-    #     # decrypt the message
-    #     decrypted_message = ecode(n, d, message)
-    #     print(decrypted_message)
-    #     response_message = input("Response: ")
-    #     response_cipher = Encode(n, e, response_message)
-    #     print ("\nn, e = {}, {}\ncipher = {}".format(n, e, response_cipher))
-
-search_encrypt('example.xml')
-#decode_and_build('encoded_example.xml', 5912443, 271)
+# search_encrypt('example.xml')
+# decode_and_build('encoded_example.xml', 2608987, 773)

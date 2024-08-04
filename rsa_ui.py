@@ -52,7 +52,7 @@ def decode():
 
         second_row = tk.Frame(top, width=100, height=100)
         second_row.grid(row=1, column=0, padx=0, pady=5)
-        popup_decode = tk.Button(second_row, text='Decode', command=lambda: rsa.decode_and_build(xml_filename, n_input.get(), e_input.get()))
+        popup_decode = tk.Button(second_row, text='Decode', command=lambda: rsa.decode_and_build(xml_filename, int(n_input.get()), int(e_input.get())))
         popup_decode.grid(row = 0, column=0, padx=0, pady=0)
         popup_close = tk.Button(second_row, text='Close', command=lambda: quit(top))
         popup_close.grid(row = 0, column=1, padx=0, pady=0)
