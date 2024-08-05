@@ -203,7 +203,7 @@ def search_encrypt(xml_filename):
     n, e = Find_Public_Key_e(p, q)
     tree = ET.parse(xml_filename)
     root = tree.getroot()
-    # Change 'book' depending on the format of the xml
+    # Edit this line based on the format of the xml file
     for book in root:
         for child in book:
             if (child.tag == 'author'):
@@ -212,14 +212,14 @@ def search_encrypt(xml_filename):
             if (child.tag == 'title'):
                 encoded_title=', '.join(str(x) for x in Encode(n,e,child.text))
                 child.text = encoded_title
-    e_filename = 'encoded_' + xml_filename
+    e_filename = 'encrypted_' + xml_filename
     tree.write(e_filename)
     return n, e, e_filename
 
 def decode_and_build(xml_filename, n, e):
     tree = ET.parse(xml_filename)
     root = tree.getroot()
-    # Change 'book' depending on the format of the xml
+    # Edit this line based on the format of the xml file
     p, q = factorize(int(n))
     d = Find_Private_Key_d(int(e), p, q)
 
@@ -229,7 +229,7 @@ def decode_and_build(xml_filename, n, e):
                 child.text = Decode(n,d,child.text)
             if (child.tag == 'title'):
                 child.text = Decode(n,d,child.text)
-    e_filename = 'decoded_' + xml_filename.split('encoded_')[1]
+    e_filename = 'decrypted_' + xml_filename.split('encrypted_')[1]
     tree.write(e_filename)
     return e_filename
     

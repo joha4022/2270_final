@@ -17,7 +17,7 @@ def browseFiles():
 
 
 # Function to handle the encode button click
-def encode():
+def encrypt():
     if(xml_filename):
         # get n and e value
         n, e, e_filename = rsa.search_encrypt(xml_filename)
@@ -34,7 +34,7 @@ def encode():
         
     
 
-def decode():
+def decrypt():
     if(xml_filename):
         top = tk.Toplevel(root)
 
@@ -52,7 +52,7 @@ def decode():
 
         second_row = tk.Frame(top, width=100, height=100)
         second_row.grid(row=1, column=0, padx=0, pady=5)
-        popup_decode = tk.Button(second_row, text='Decode', command=lambda: rsa.decode_and_build(xml_filename, int(n_input.get()), int(e_input.get())))
+        popup_decode = tk.Button(second_row, text='Decrypt', command=lambda: rsa.decode_and_build(xml_filename, int(n_input.get()), int(e_input.get())))
         popup_decode.grid(row = 0, column=0, padx=0, pady=0)
         popup_close = tk.Button(second_row, text='Close', command=lambda: quit(top))
         popup_close.grid(row = 0, column=1, padx=0, pady=0)
@@ -94,10 +94,10 @@ label1.grid(row=0, column=1, padx=5, pady=0)
 bottom_frame = tk.Frame(root, width = 100, height=10)
 bottom_frame.grid(row=2, column=0, padx=5, pady=0)
 
-encode_button = tk.Button(bottom_frame, text="Encode", command=encode)
+encode_button = tk.Button(bottom_frame, text="Encrypt", command=encrypt)
 encode_button.grid(row=0, column=0, padx=5, pady=5)
 
-decode_button = tk.Button(bottom_frame, text="Decode", command=decode)
+decode_button = tk.Button(bottom_frame, text="Decrypt", command=decrypt)
 decode_button.grid(row=0, column=1, padx=5, pady=5)
 
 quit_button = tk.Button(bottom_frame, text="Close", command=lambda: quit(root))
