@@ -31,8 +31,6 @@ def encrypt():
         text_label.grid(row = 2, column=0, padx=(5,0), pady=0, sticky='w')
         popup_close = tk.Button(top, text='Close', command=lambda: quit(top))
         popup_close.grid(row = 3, column=0, padx=0, pady=(0,5))
-        
-    
 
 def decrypt():
     if(xml_filename):
@@ -50,9 +48,23 @@ def decrypt():
         e_input = tk.Entry(first_row)
         e_input.grid(row = 1, column=1, padx=0, pady=0)
 
+        def decrypt_function(top):
+            filename = rsa.decode_and_build(xml_filename, int(n_input.get()), int(e_input.get()))
+            if(filename):
+                quit(top)
+                top = tk.Toplevel(root)
+                first_row = tk.Frame(top, width=100, height=100)
+                first_row.grid(row=0, column=0, padx=5, pady=0)
+                n_label = tk.Label(first_row, text="Success: {}".format(filename))
+                n_label.grid(row = 0, column=0, padx=0, pady=0)
+                second_row = tk.Frame(top, width=100, height=100)
+                second_row.grid(row=1, column=0, padx=0, pady=5)
+                popup_close = tk.Button(second_row, text='Close', command=lambda: quit(top))
+                popup_close.grid(row = 0, column=0, padx=0, pady=0)
+
         second_row = tk.Frame(top, width=100, height=100)
         second_row.grid(row=1, column=0, padx=0, pady=5)
-        popup_decode = tk.Button(second_row, text='Decrypt', command=lambda: rsa.decode_and_build(xml_filename, int(n_input.get()), int(e_input.get())))
+        popup_decode = tk.Button(second_row, text='Decrypt', command=lambda: decrypt_function(top))
         popup_decode.grid(row = 0, column=0, padx=0, pady=0)
         popup_close = tk.Button(second_row, text='Close', command=lambda: quit(top))
         popup_close.grid(row = 0, column=1, padx=0, pady=0)
