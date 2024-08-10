@@ -170,8 +170,12 @@ def Decode(n, d, cipher_text):
     message = ''
     decrypted_int_list = []
     # use FME to get decrypted list of int
-    for _int in cipher_text.split(","):
-        decrypted_int_list.append(FME(int(_int), d, n))
+    if('_' in cipher_text):
+        for _int in cipher_text.split("_"):
+            decrypted_int_list.append(FME(int(_int), d, n))
+    else:
+        for _int in cipher_text.split(","):
+            decrypted_int_list.append(FME(int(_int), d, n))
     # convert decrypted message to text
     message = Convert_Num(decrypted_int_list)
     
@@ -204,16 +208,20 @@ def search_encrypt(xml_filename):
     tree = ET.parse(xml_filename)
     root = tree.getroot()
     # Edit this line based on the format of the xml file
-    for book in root:
+    for book in root.findall('book'):
+        book.tag = 'info'
         for child in book:
             if (child.tag == 'author'):
-                encoded_author=', '.join(str(x) for x in Encode(n,e,child.text))
+                encoded_author = ', '.join(str(x) for x in Encode(n,e,child.text))
                 child.text = encoded_author
-            if (child.tag == 'title'):
-                encoded_title=', '.join(str(x) for x in Encode(n,e,child.text))
+                child.tag = 'encrypted_a'
+            elif (child.tag == 'title'):
+                encoded_title = ', '.join(str(x) for x in Encode(n,e,child.text))
                 child.text = encoded_title
+                child.tag = 'encrypted_b'
     e_filename = 'encrypted_' + xml_filename
     tree.write(e_filename)
+    print(n,e)
     return n, e, e_filename
 
 def decode_and_build(xml_filename, n, e):
@@ -223,15 +231,16 @@ def decode_and_build(xml_filename, n, e):
     p, q = factorize(int(n))
     d = Find_Private_Key_d(int(e), p, q)
 
+
     for book in root:
         for child in book:
-            if (child.tag == 'author'):
+            if (child.tag == 'encrypted_a'):
                 child.text = Decode(n,d,child.text)
-            if (child.tag == 'title'):
+            if (child.tag == 'encrypted_b'):
                 child.text = Decode(n,d,child.text)
     e_filename = 'decrypted_' + xml_filename.split('encrypted_')[1]
     tree.write(e_filename)
     return e_filename
     
-# search_encrypt('example.xml')
-# decode_and_build('encoded_example.xml', 2608987, 773)
+#search_encrypt('example.xml')
+#decode_and_build("encrypted_example.xml", 14189291, 557)
